@@ -3,24 +3,22 @@ var resolve = require('path').resolve,
     webpack = require('webpack'),
     webpackDevMiddleware = require('webpack-dev-middleware'),
     webpackHotMiddleware = require('webpack-hot-middleware'),
-    config = require('../webpack.config')
+    config = require('../webpack.config'),
+    port = process.env.PORT || 8080
 
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
-      port = process.env.PORT || 8080
 
 router.get('/', function (req, res, next) {
-  console.log('hello')
   console.log('ID:', req.params.id)
   next()
 }, function (req, res, next) {
   res.send('User Info')
 })
 
-app.use(webpackHotMiddleware(compiler))
 app.use(router)
-
+app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
   historyApiFallback: true,
