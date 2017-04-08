@@ -7,7 +7,7 @@
 
 <script>
 const routes = {
-  '/': { template: `<h1>Vuency</h1>` }
+  '/': { template: `<h1>Eager Routing</h1>` }
 }
 
 export default {
