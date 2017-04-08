@@ -5,17 +5,16 @@ var resolve = require('path').resolve,
     webpackHotMiddleware = require('webpack-hot-middleware'),
     config = require('../webpack.config'),
     fs = require('fs'),
-    MarkovChain = require('markovchain');
- 
-var projectRoot = resolve(__dirname, '..');
+    MarkovChain = require('markovchain'),
+    port = process.env.PORT || 8080,
+    projectRoot = resolve(__dirname, '..');
+    
 
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
-      port = process.env.PORT || 8080
 
 router.get('/', function (req, res, next) {
-  console.log('hello')
   console.log('ID:', req.params.id)
   next()
 });
@@ -44,9 +43,8 @@ router.get('/*', function(req, res, next) {
   res.send('success');
 });
 
-app.use(webpackHotMiddleware(compiler))
 app.use(router)
-
+app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
   historyApiFallback: true,
