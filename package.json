@@ -16,6 +16,7 @@
     "upgrade": "npm --no-git-tag-version version patch && npm run build && npm publish"
   },
   "dependencies": {
+    "markovchain": "^1.0.2",
     "vue": "^2.1.8"
   },
   "devDependencies": {
