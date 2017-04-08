@@ -24,4 +24,4 @@ app.use(express.static(__dirname))
 
 module.exports = app.listen(port, 'localhost', function (err, result) {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
-})
+});
