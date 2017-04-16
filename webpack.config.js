@@ -10,6 +10,7 @@ var devRoot = resolve(__dirname, './demo')
 var prodRoot = resolve(__dirname, './dist')
 
 const baseConfig = {
+  target: 'node',
   resolve: {
     extensions: [ // automatically resolve certain extensions
       '.js', '.vue', '.json'
@@ -64,9 +65,10 @@ const baseConfig = {
 }
 
 const devConfig = {
-    entry: `${devRoot}/main.js`,
+    entry: `${srcRoot}/index.js`,
     output: {
-      publicPath: '/'
+      publicPath: '/dist/',
+      filename: 'build.js'
     },
     devtool: '#eval-source-map',
     performance: { hints: false },
@@ -87,6 +89,7 @@ const devConfig = {
 }
 
 const prodConfig = {
+  target: 'node',
   entry: `${srcRoot}/index.js`,
   output: {
     path: prodRoot,
