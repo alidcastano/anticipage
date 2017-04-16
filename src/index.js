@@ -18,8 +18,6 @@ export default function anticipage (req, res, next) {
     return
   } else if (!prevRoute) {
     prevRoute = currRoute
-    next()
-    return
   } else if (currRoute !== prevRoute) {
     logRoute(user, prevRoute, currRoute)
     prevRoute = currRoute

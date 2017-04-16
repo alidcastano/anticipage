@@ -16,6 +16,7 @@ router.get('/*', function(req, res, next) {
   res.send('Success')
 })
 
+app.enable('trust proxy')
 app.use(anticipage)
 app.use(router)
 app.use(webpackHotMiddleware(compiler))

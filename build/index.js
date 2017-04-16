@@ -36,8 +36,6 @@ function anticipage(req, res, next) {
     return;
   } else if (!prevRoute) {
     prevRoute = currRoute;
-    next();
-    return;
   } else if (currRoute !== prevRoute) {
     (0, _logger2.default)(user, prevRoute, currRoute);
     prevRoute = currRoute;
