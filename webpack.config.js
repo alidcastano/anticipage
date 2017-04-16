@@ -60,9 +60,6 @@ const baseConfig = {
         }
       }
     ]
-  },
-  node: {
-    fs: 'empty'
   }
 }
 
@@ -117,7 +114,10 @@ const prodConfig = {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ]),
+  node: {
+    fs: 'empty'
+  }
 }
 
 var finalConfig
