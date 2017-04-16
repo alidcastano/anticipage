@@ -7,16 +7,18 @@ var resolve = require('path').resolve,
     fs = require('fs'),
     MarkovChain = require('markovchain'),
     port = process.env.PORT || 8080,
-    projectRoot = resolve(__dirname, '..');
+    projectRoot = resolve(__dirname, '..'),
+    anticipage = require('../src/index');
     
-
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
 
+router.use(anticipage);
+
 router.get('/', function (req, res, next) {
-  console.log('ID:', req.params.id)
-  next()
+  console.log('ID:', req.params.id);
+  next();
 });
 
 var top = 0;
@@ -24,24 +26,7 @@ var settings = 0;
 var projects = 0;
 var total = 0;
 
-router.get('/*', function(req, res, next) {
-  quotes = new MarkovChain(fs.readFileSync('./user1.txt', 'utf8'));
-  next  = quotes.start(req.url).end(1).process().split(' ')[1];
-  if (next === '/top') {
-    top++;
-  }
-  else if (next === '/settings') {
-    settings++;
-  }
-  else if (next === '/projects') {
-    projects++;
-  }
-  total++;
-  console.log('settings: ' + settings/total);
-  console.log('projects: ' + projects/total);
-  console.log('top: ' + top/total);
-  res.send('success');
-});
+
 
 app.use(router)
 app.use(webpackHotMiddleware(compiler))
