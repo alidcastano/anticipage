@@ -13,7 +13,7 @@ const baseConfig = {
   target: 'node',
   resolve: {
     extensions: [ // automatically resolve certain extensions
-      '.js', '.vue'
+      '.js', '.vue', '.json'
     ],
     alias: { // create an alias for commonly used modules
       'vue$': 'vue/dist/vue.common.js', // vue standalone build
@@ -61,6 +61,9 @@ const baseConfig = {
         }
       }
     ]
+  },
+  node: {
+    fs: 'empty'
   }
 }
 

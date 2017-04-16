@@ -13,21 +13,23 @@ module.exports = {
   // add your custom rules here
   rules: {
     "brace-style": ["error", "1tbs"],
-    "one-var": ["error", "always"],
     "space-before-function-paren": ["error", {
       "anonymous": "never",
       "named": "never",
       "asyncArrow": "always"
     }],
-    "indent": ["error", 2,
-      {
-        "VariableDeclarator": {
-          "var": 2,
-          "let": 2,
-          "const": 3
-        }
+    "one-var": ["error", {
+      var: "always",
+      let: "never",
+      const: "never"
+    }],
+    "indent": ["error", 2, {
+      "VariableDeclarator": {
+        "var": 2,
+        "let": 2,
+        "const": 3
       }
-    ]
+    }]
   },
   globals: {}
 }

@@ -6,16 +6,14 @@ var resolve = require('path').resolve,
     config = require('../webpack.config'),
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
-    anticipage = require('../src/index');
-
+    anticipage = require('../dist/build.js')
 
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
 
-
-app.use(anticipage);
-app.use(router);
+app.use(router)
+app.use(anticipage)
 
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
@@ -26,7 +24,6 @@ app.use(webpackDevMiddleware(compiler, {
    chunks: false
  }
 }))
-
 
 // app.use(express.static(__dirname))
 
