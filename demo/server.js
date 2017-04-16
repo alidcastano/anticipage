@@ -9,7 +9,6 @@ var resolve = require('path').resolve,
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..')
 
-
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
