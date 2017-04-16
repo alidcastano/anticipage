@@ -8,12 +8,12 @@ var total = 0,
 
 export default function anticipage(req, res, next) {
   // Don't log favicon.ico route
-  /*
+  console.log(req.ip)
+
   if (req.path === '/favicon.ico') {
     next()
     return
   }
-  */
 
   var quotes = new MarkovChain(fs.readFileSync('./user1.txt', 'utf8')),
       nextRoute = quotes.start(req.url).end(1).process().split(' ')[1]
