@@ -27,6 +27,4 @@ function anticipage(req, res, next) {
   next()
 }
 
-module.exports = {
-    anticipage
-}
+module.exports = anticipage

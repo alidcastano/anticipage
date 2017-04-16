@@ -4,23 +4,19 @@ var resolve = require('path').resolve,
     webpackDevMiddleware = require('webpack-dev-middleware'),
     webpackHotMiddleware = require('webpack-hot-middleware'),
     config = require('../webpack.config'),
-    fs = require('fs'),
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
-    anticipage = require('../src/index').anticipage;
+    anticipage = require('../src/index');
+
 
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
 
 
-router.get('/', function (req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-});
-
 app.use(anticipage);
 app.use(router);
+
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
@@ -30,6 +26,8 @@ app.use(webpackDevMiddleware(compiler, {
    chunks: false
  }
 }))
+
+
 // app.use(express.static(__dirname))
 
 module.exports = app.listen(port, 'localhost', function (err, result) {
