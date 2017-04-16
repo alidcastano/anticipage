@@ -6,7 +6,8 @@
   "module": "dist/build.js",
   "main": "dist/build.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node demo/server.js",
+    "babel": "babel src --watch --out-dir build --plugins=transform-runtime --presets=es2015",
+    "dev": "npm run babel & cross-env NODE_ENV=development node demo/server.js",
     "e2e": "cross-env NODE_ENV=development node test/e2e/runner.js",
     "unit": "cross-env NODE_ENV=development karma start test/unit/karma.conf.js",
     "test": "npm run unit && npm run e2e",
@@ -16,10 +17,12 @@
     "upgrade": "npm --no-git-tag-version version patch && npm run build && npm publish"
   },
   "dependencies": {
+    "babel-register": "^6.24.1",
     "markovchain": "^1.0.2",
     "vue": "^2.1.8"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.2",

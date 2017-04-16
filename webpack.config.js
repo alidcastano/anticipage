@@ -61,16 +61,14 @@ const baseConfig = {
         }
       }
     ]
-  },
-  node: {
-    fs: 'empty'
   }
 }
 
 const devConfig = {
     entry: `${srcRoot}/index.js`,
     output: {
-      publicPath: '/'
+      publicPath: '/dist/',
+      filename: 'build.js'
     },
     devtool: '#eval-source-map',
     performance: { hints: false },
@@ -119,7 +117,10 @@ const prodConfig = {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ]),
+  node: {
+    fs: 'empty'
+  }
 }
 
 var finalConfig

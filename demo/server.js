@@ -6,7 +6,7 @@ var resolve = require('path').resolve,
     config = require('../webpack.config'),
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
-    anticipage = require('../dist/build.js').default;
+    anticipage = require('../build/index.js').default;
 
 const compiler = webpack(config),
       app = express(),
@@ -28,8 +28,6 @@ app.use(webpackDevMiddleware(compiler, {
    chunks: false
  }
 }))
-
-// app.use(express.static(__dirname))
 
 module.exports = app.listen(port, 'localhost', function (err, result) {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)

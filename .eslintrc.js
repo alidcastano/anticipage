@@ -13,11 +13,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     "brace-style": ["error", "1tbs"],
-    "space-before-function-paren": ["error", {
-      "anonymous": "never",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
+    "space-before-function-paren": ["error", "always"],
     "one-var": ["error", {
       var: "always",
       let: "never",
