@@ -4,6 +4,7 @@ var MarkovChain = require('markovchain'),
 var total = 0, top = 0, settings = 0, projects = 0
 
 function anticipage(req, res, next) {
+  // Don't log favicon.ico route
   if (req.path === "/favicon.ico") {
       return next()
   }

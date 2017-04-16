@@ -10,6 +10,7 @@ var devRoot = resolve(__dirname, './demo')
 var prodRoot = resolve(__dirname, './dist')
 
 const baseConfig = {
+  target: 'node',
   resolve: {
     extensions: [ // automatically resolve certain extensions
       '.js', '.vue'
@@ -87,6 +88,7 @@ const devConfig = {
 }
 
 const prodConfig = {
+  target: 'node',
   entry: `${srcRoot}/index.js`,
   output: {
     path: prodRoot,
