@@ -9,7 +9,7 @@ var resolve = require('path').resolve,
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
     anticipage = require('../src/index');
-    
+
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
@@ -21,12 +21,10 @@ router.get('/', function (req, res, next) {
   next();
 });
 
-var top = 0;
-var settings = 0;
-var projects = 0;
-var total = 0;
-
-
+var top = 0
+var settings = 0
+var projects = 0
+var total = 0
 
 app.use(router)
 app.use(webpackHotMiddleware(compiler))
@@ -41,5 +39,5 @@ app.use(webpackDevMiddleware(compiler, {
 // app.use(express.static(__dirname))
 
 module.exports = app.listen(port, 'localhost', function (err, result) {
-  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`);
-});
+  console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
+})
