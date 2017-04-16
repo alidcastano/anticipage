@@ -6,24 +6,26 @@ var total = 0,
     settings = 0,
     projects = 0
 
-function anticipage(req, res, next) {
+export default function anticipage(req, res, next) {
   // Don't log favicon.ico route
-  if (req.path === "/favicon.ico") {
-      return next()
+  /*
+  if (req.path === '/favicon.ico') {
+    next()
+    return
   }
+  */
 
-  const quotes = new MarkovChain(fs.readFileSync('./user1.txt', 'utf8'))
-  const nextRoute = quotes.start(req.url).end(1).process().split(' ')[1]
+  var quotes = new MarkovChain(fs.readFileSync('./user1.txt', 'utf8')),
+      nextRoute = quotes.start(req.url).end(1).process().split(' ')[1]
 
   if (nextRoute === '/top') top++
   else if (nextRoute === '/settings') settings++
   else if (nextRoute === '/projects') projects++
   total++
 
-  console.log('settings: ' + settings / total)
-  console.log('projects: ' + projects / total)
-  console.log('top: ' + top / total)
+  console.log('Settings: ' + settings / total)
+  console.log('Projects: ' + projects / total)
+  console.log('Top: ' + top / total)
 
-  res.send('success')
   next()
 }

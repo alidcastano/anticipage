@@ -68,7 +68,7 @@ const baseConfig = {
 }
 
 const devConfig = {
-    entry: `${devRoot}/main.js`,
+    entry: `${srcRoot}/index.js`,
     output: {
       publicPath: '/'
     },

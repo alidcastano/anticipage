@@ -6,15 +6,18 @@ var resolve = require('path').resolve,
     config = require('../webpack.config'),
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
-    anticipage = require('../dist/build.js')
+    anticipage = require('../dist/build.js').default;
 
 const compiler = webpack(config),
       app = express(),
       router = express.Router()
 
-app.use(router)
-app.use(anticipage)
+router.get('/*', function(req, res, next) {
+  res.send('Success')
+})
 
+app.use(anticipage)
+app.use(router)
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
