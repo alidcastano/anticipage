@@ -3,10 +3,6 @@
     ["es2015", { "modules": false }],
     "stage-1"
   ],
-  "plugins": [
-    "transform-runtime",
-    "transform-vue-jsx",
-    "transform-decorators-legacy"
-  ],
+  "plugins": ["transform-runtime"],
   "comments": false
 }
