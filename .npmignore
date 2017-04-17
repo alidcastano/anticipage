@@ -3,5 +3,6 @@ webpack.config.js
 dev/
 test/
 src/
+build/
 demo/
 docs/
