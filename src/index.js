@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { isFileSync } from './util'
-import MarkovChain from 'markovchain'
+import MarkovChain from './markovchain'
 import logRoute, { path } from './logger'
 
 var total = 0,
