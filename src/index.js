@@ -9,8 +9,8 @@ var total = 0,
     projects = 0,
     prevRoute = null
 
-export default function anticipage(opts) {
-  return function(req, res, next) {
+export default function anticipage (opts) {
+  return function (req, res, next) {
     const user = req.ip
     const currRoute = req.path
 
@@ -44,6 +44,8 @@ export default function anticipage(opts) {
 
 // With a multi-node architecture you need to sync the data across nodes in order to
 // build the Markov Chain on all of the data
-function syncNodes() {
+/*
+  function syncNodes () {
 
-}
+  }
+*/
