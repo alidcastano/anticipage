@@ -1,7 +1,7 @@
 {
-  "name": "vuency",
-  "description": "a vuejs concurrency management plugin",
-  "version": "0.0.33",
+  "name": "AnticiPage",
+  "description": "Predictive Routing for ExpressJs",
+  "version": "0.0.1",
   "author": "Alid Castano <alidcastano@gmail.com>",
   "module": "dist/build.js",
   "main": "dist/build.js",
@@ -10,11 +10,20 @@
     "dev": "cross-env NODE_ENV=development node demo/server.js",
     "e2e": "cross-env NODE_ENV=development node test/e2e/runner.js",
     "unit": "cross-env NODE_ENV=development karma start test/unit/karma.conf.js",
-    "test": "npm run unit && npm run e2e",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "purge": "rm -rf dist/",
     "bundle": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build": "npm run purge && npm run bundle",
     "upgrade": "npm --no-git-tag-version version patch && npm run build && npm publish"
+  },
+  "dependencies": {
+    "pick-one-by-weight": "^1.0.2",
+    "babel-register": "^6.24.1",
+    "level": "^1.6.0",
+    "markovchain": "^1.0.2",
+    "sequelize": "^3.30.4",
+    "sinon": "^1.17.7",
+    "vue": "^2.1.8"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -60,8 +69,5 @@
     "webpack-dev-server": "^2.1.0-beta.9",
     "webpack-hot-middleware": "^2.18.0",
     "webpack-merge": "^1.1.2"
-  },
-  "dependencies": {
-    "pick-one-by-weight": "^1.0.2"
   }
 }
