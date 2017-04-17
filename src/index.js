@@ -7,7 +7,7 @@ var total = 0,
     settings = 0,
     projects = 0
 
-export default function anticipage(req, res, next) {
+export default function logRoute(req, res, next) {
   // Don't log favicon.ico route
   console.log(req.ip)
 
@@ -29,4 +29,10 @@ export default function anticipage(req, res, next) {
   console.log('Top: ' + top / total)
 
   next()
+}
+
+// With a multi-node architecture you need to sync the data across nodes in order to
+// build the Markov Chain on all of the data
+function syncNodes() {
+
 }
