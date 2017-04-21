@@ -12,7 +12,7 @@ describe("Initialize DB", function() {
 		it("Can retrieve item", function(done) {
 			db.get('global', {valueEncoding: 'json'}, function(err, value) {  
 	  			if (err) {
-	    			return handleError(err);
+	    			return handleError(err)
 	  			}
 	  			expect(value['home/settings'] === 0.5).to.be.true
 	  			done();
