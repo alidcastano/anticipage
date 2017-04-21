@@ -6,7 +6,7 @@ var resolve = require('path').resolve,
     config = require('../webpack.config'),
     port = process.env.PORT || 8080,
     projectRoot = resolve(__dirname, '..'),
-    anticipage = require('../build/index.js').default;
+    anticipage = require('../build/index.js').default
 
 const compiler = webpack(config),
       app = express(),
@@ -17,7 +17,7 @@ router.get('/*', function(req, res, next) {
 })
 
 app.enable('trust proxy')
-app.use(anticipage)
+app.use(anticipage())
 app.use(router)
 app.use(webpackHotMiddleware(compiler))
 app.use(webpackDevMiddleware(compiler, {

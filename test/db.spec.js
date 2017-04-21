@@ -1,16 +1,20 @@
 var db = require('../src/db')
-
+var expect = require('chai').expect
 
 describe("Initialize DB", function() {
-	describe("Add two items", function() {
-	  	db.put('key 1', 'value 1')
-		db.put('key 2', 'value 2')
+	describe("Put a javascript ovject", function() {
+		var globalModel = {
+			'home/settings': 0.5,
+			'home/top': 0.2,
+			'home/list': 0.3
+		}
+	  	db.put('global', globalModel, {valueEncoding: 'json'})
 		it("Can retrieve item", function(done) {
-			db.get('key 1', function(err, value) {  
+			db.get('global', {valueEncoding: 'json'}, function(err, value) {  
 	  			if (err) {
 	    			return handleError(err);
 	  			}
-	  			console.log('value:', value);
+	  			expect(value['home/settings'] === 0.5).to.be.true
 	  			done();
 			});
 	  	});

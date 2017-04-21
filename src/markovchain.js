@@ -14,7 +14,15 @@ export default class MarkovChain {
     this.sentence = ''
     this._normalizeFn = normFn
     this.parseBy = /(?:\.|\?|\n)/ig
-    this.parse(contents)
+
+    const type = isType(contents);
+    if (type === 'object') {
+      this.wordBank = contents;
+      return this;
+    }
+    else {
+      this.parse(contents);
+    }
   }
 
   startFn (wordList) {

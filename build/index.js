@@ -3,55 +3,62 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 exports.default = anticipage;
 
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
-var _util = require('./util');
-
-var _markovchain = require('markovchain');
+var _markovchain = require('./markovchain');
 
 var _markovchain2 = _interopRequireDefault(_markovchain);
 
-var _logger = require('./logger');
-
-var _logger2 = _interopRequireDefault(_logger);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var total = 0,
-    top = 0,
-    settings = 0,
-    projects = 0,
-    prevRoute = null;
+var db = require('./db');
+var chain = loadChain();
+var routeLog = { 'global': '' };
 
-function anticipage(req, res, next) {
-  var user = req.ip;
-  var currRoute = req.path;
+function logRoutes(currRoute, user) {
+  routeLog['global'] += currRoute + ' ';
+  if ((0, _keys2.default)(routeLog).includes(user)) {
+    routeLog[user] += currRoute + ' ';
+  } else {
+    routeLog[user] = currRoute;
+  }
+}
 
-  if (currRoute === '/favicon.ico') {
+function loadChain() {
+  db.get('global', { valueEncoding: 'json' }, function (err, routes) {
+    chain = new _markovchain2.default(routes);
+  });
+}
+
+function updateChain() {
+  chain.parse(routeLog['global']);
+  db.put('global', quotes.wordBank, { valueEncoding: 'json' }, function (err, value) {
+    if (err) {
+      console.log(err);
+      return next();
+    }
     next();
-    return;
-  } else if (!prevRoute) {
-    prevRoute = currRoute;
-  } else if (currRoute !== prevRoute) {
-    (0, _logger2.default)(user, prevRoute, currRoute);
-    prevRoute = currRoute;
-  }
+  });
+  routeLog = { 'global': '' };
+}
 
-  if ((0, _util.isFileSync)(_logger.path)) {
-    var quotes = new _markovchain2.default(_fs2.default.readFileSync(_logger.path, 'utf8')),
-        nextRoute = quotes.start(req.url).end(1).process().split(' ')[1];
+function anticipage(opts) {
+  return function (req, res, next) {
+    var user = req.ip;
+    var currRoute = req.path;
 
-    if (nextRoute === '/top') top++;else if (nextRoute === '/settings') settings++;else if (nextRoute === '/projects') projects++;
-    total++;
+    if (currRoute === '/favicon.ico') return next();
 
-    console.log('Settings: ' + settings / total);
-    console.log('Projects: ' + projects / total);
-    console.log('Top: ' + top / total);
-  }
-
-  next();
+    logRoutes(currRoute, user);
+    if (routeLog['global'].length > 100) {
+      updateChain();
+    } else {
+      next();
+    }
+  };
 }
